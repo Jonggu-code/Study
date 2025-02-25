@@ -29,6 +29,10 @@ const obj2 = obj1;
 const obj3 = { ...obj1 };
 
 // 객체 비교
-console.log(obj1 === obj2); // false (값은 같지만 참조가 다름)
-console.log(obj1 === obj3); // true (같은 참조를 가리킴)
-console.log(JSON.stringify(obj1) === JSON.stringify(obj2));
+console.log(obj1 === obj2); // true (같은 참조를 가리킴)
+console.log(obj1 === obj3); // false (값은 같지만 참조가 다름)
+console.log(JSON.stringify(obj1) === JSON.stringify(obj2)); // true (객체를 문자열로 변환하여 비교)
+
+obj1 === obj2;
+
+JSON.stringify(obj1) === JSON.stringify(obj2);
