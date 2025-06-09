@@ -33,4 +33,36 @@ window.addEventListener("load",function(){
     }
 
     this.setInterval(moveSlide, 2500);
+
+    // 팝업 열기&닫기
+    let popup = this.document.querySelector(".popup")
+    let btnClose = this.document.querySelector(".btnClose")
+    let btnOpen = this.document.querySelector(".btnOpen")
+
+    btnOpen.addEventListener("click",function(){
+        popup.classList.add("on")
+    })
+    btnClose.addEventListener("click",function(){
+        popup.classList.remove("on")
+    })
+
+    // 공지사항 - 갤러리 토글
+    let onNotice = this.document.querySelector(".tabsNotice")
+    let onGallery = this.document.querySelector(".tabsGallery")
+    let notice = this.document.querySelector(".notice")
+    let gallery = this.document.querySelector(".gallery")
+
+
+    onNotice.addEventListener("click",function(){
+        onNotice.classList.add("on")
+        onGallery.classList.remove("on")
+        gallery.classList.remove("on")
+        notice.classList.add("on")
+    })
+    onGallery.addEventListener("click",function(){
+        onGallery.classList.add("on")
+        onNotice.classList.remove("on")
+        notice.classList.remove("on")
+        gallery.classList.add("on")
+    })
 })
