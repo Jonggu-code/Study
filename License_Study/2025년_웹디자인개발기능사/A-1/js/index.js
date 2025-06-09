@@ -35,6 +35,6 @@ window.addEventListener("load",function(){
         // 슬라이드 이동
         count++
         if(count>2){count=0}
-        train.style.transform = `translateY(${-33.333*count}%)`
+        train.style.transform = `translateY(${33.333*count}%)`
     },2500)
 })

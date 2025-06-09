@@ -1,0 +1,162 @@
+@charset "utf-8";
+* {
+    margin: 0;
+    padding: 0;
+}
+a {
+    text-decoration: inherit;
+    color: inherit;
+}
+ul,ol {
+    list-style: none;
+}
+img {
+    max-width: 100%;
+}
+
+/* common */
+
+html {
+    background-color: #fff;
+    color: #333333;
+}
+#wrap {
+    width: 1200px;
+    height: 700px;
+    margin: 0 auto;
+    background-color: antiquewhite;
+}
+
+/* header */
+
+header {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+}
+.logo {
+    display: flex;
+    align-items: center;
+}
+.gnb {
+    width: auto;
+    height: 50px;
+    background-color: #fff;
+
+    margin-top: 25px;
+    margin-right: 25px;
+
+    display: flex;
+    text-align: center;
+
+    overflow: hidden;
+    transition: all 0.6s ease 0s;
+
+    z-index: 99;
+}
+.gnb > li > a {
+    width: 170px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.gnb > li > ul > li > a {
+    width: 170px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* header - hover */
+.gnb:hover {
+    height: 210px;
+}
+.gnb > li:hover > a {
+    background-color: #000;
+    color: #fff;
+}
+.gnb > li > ul > li:hover > a {
+    background-color: #000;
+    color: #fff;
+}
+
+/* slide (station) */
+
+.station {
+    width: 1200px;
+    height: 300px;
+    font-size: 0;
+    overflow: hidden;
+}
+.train {
+    width: 4800px;
+    height: auto;
+    display: flex;
+}
+.train > li {
+    width: 1200px;
+    height: 300px;
+}
+
+/* contents (공지사항 / 갤러리) */
+.contents {
+    width: 100%;
+    height: 200px;
+    background-color: aquamarine;
+    display: flex;
+}
+.contents > section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.tabMenu {
+    width: 95%;
+}
+.tabs {
+    display: flex;
+    padding-left: 10px;
+}
+.tabs > a {
+    padding: 6px;
+    /* border: 1px solid blue; */
+    box-sizing: border-box;
+}
+.tabs > a.on {
+    background-color: bisque;
+}
+.notice {
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: bisque;
+}
+.notice > li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+.notice > li > span {
+    font-size: 14px;
+    color: #666666;
+}
+
+.gallery {
+    display: none;
+}
+
+
+.banner {
+    background: url(../img/banner.jpg) no-repeat 50% 50% / cover;
+}
+.direct {
+    background: url(../img/direct.jpg) no-repeat 50% 50% / cover;
+}
+.banner > a, .direct > a {
+    padding: 10px 30px;
+    background-color: aquamarine;
+}
