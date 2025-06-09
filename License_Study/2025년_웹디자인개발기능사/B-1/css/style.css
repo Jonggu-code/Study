@@ -42,7 +42,7 @@ header {
 .gnb {
     width: auto;
     height: 50px;
-    background-color: #fff;
+    background-color: rgb(184, 238, 189);
 
     margin-top: 25px;
     margin-right: 25px;
@@ -75,11 +75,11 @@ header {
     height: 210px;
 }
 .gnb > li:hover > a {
-    background-color: #000;
+    background-color: rgb(18, 77, 24);
     color: #fff;
 }
 .gnb > li > ul > li:hover > a {
-    background-color: #000;
+    background-color: rgb(18, 77, 24);
     color: #fff;
 }
 
