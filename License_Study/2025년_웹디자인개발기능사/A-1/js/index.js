@@ -16,7 +16,7 @@ window.addEventListener("load",function(){
     let tab_contents = this.document.querySelectorAll(".tab_contents>ul")
     tabs.forEach(function(tab,index){
         tab.addEventListener("click",function(){
-            // 탭 기능 활성화화
+            // 탭 기능 활성화
             tabs[0].classList.remove("on")
             tabs[1].classList.remove("on")
             tab.classList.add("on")

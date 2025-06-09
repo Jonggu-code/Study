@@ -120,6 +120,7 @@ header {
 .tabs a.on {
   background-color: salmon;
 }
+
 .notice li {
   display: flex;
   justify-content: space-between;
@@ -127,6 +128,9 @@ header {
 .gallery {
   display: flex;
   justify-content: space-between;
+}
+.tab_contents {
+  height: 100%;
 }
 .tab_contents > ul {
   display: none;
