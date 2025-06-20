@@ -87,18 +87,17 @@ header {
 
 .station {
     width: 1200px;
-    height: 300px;
     font-size: 0;
     overflow: hidden;
 }
 .train {
-    width: 4800px;
-    height: auto;
     display: flex;
+    transition: transform 0.5s ease;
+    /* will-change: transform; */
 }
 .train > li {
     width: 1200px;
-    height: 300px;
+    flex-shrink: 0;
 }
 
 /* contents (공지사항 / 갤러리) */
