@@ -1,13 +1,14 @@
 import TodoItem from './TodoItem';
 
-const TodoList = ({ todos, onToggle }) => {
+function TodoList({ todos }) {
   return (
-    <ul style={{ listStyle: 'none', padding: 0 }}>
+    <ul>
+      {/* todos 배열을 map()으로 순회하며 TodoItem을 반복 렌더링 */}
       {todos.map(todo => (
-        <TodoItem key={todo.id} todo={todo} onToggle={onToggle} />
+        <TodoItem key={todo.id} text={todo.text} />
       ))}
     </ul>
   );
-};
+}
 
 export default TodoList;
