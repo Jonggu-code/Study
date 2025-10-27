@@ -15,6 +15,7 @@ function App() {
   const handleAddTodo = () => {
     if (newTodo.trim() === '') {
       alert('오늘의 할 일은 빈칸일 수 없습니다 !');
+      return;
     }
 
     const newItem = {
@@ -54,6 +55,11 @@ function App() {
         type="text"
         value={newTodo}
         onChange={e => setNewTodo(e.target.value)}
+        onKeyDown={e => {
+          if (e.key === 'Enter') {
+            handleAddTodo();
+          }
+        }}
         placeholder="오늘의 할일은 무엇인가요?"
       />
       <button onClick={handleAddTodo}>추가</button>

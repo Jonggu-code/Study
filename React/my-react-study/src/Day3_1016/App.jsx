@@ -22,7 +22,6 @@ const App = () => {
 
     const newItem = {
       id: Date.now(),
-      number: todos.length + 1,
       text: newTodo,
       done: false,
     };
