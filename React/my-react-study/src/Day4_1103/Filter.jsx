@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Filter = (filter, setFilter) => {
+const Filter = ({ filter, setFilter }) => {
   const btnStyle = 'px-4 py-2 rounded cursor-pointer font-bold';
 
   return (
