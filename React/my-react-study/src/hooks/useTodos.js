@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 export const useTodos = () => {
-  // 1. 상태 관리
+  // 상태 관리
   const [todos, setTodos] = useState(() => {
     const saved = localStorage.getItem('todos');
     return saved ? JSON.parse(saved) : [];

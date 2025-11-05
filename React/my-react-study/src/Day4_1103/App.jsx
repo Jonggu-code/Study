@@ -1,18 +1,19 @@
 import { useState } from 'react';
-import TodoList from './TodoList';
-import Header from './Header';
-import './App.css';
 import { useTodos } from '../hooks/useTodos';
+import TodoList from './components/TodoList';
+import Header from './components/Header';
+import ConfirmModal from './components/ConfirmModal';
 import Filter from './Filter';
+import './App.css';
 
 const App = () => {
-  // ✅ 1. 상태 관리
+  // 상태 관리
   const { todos, newTodo, setNewTodo, addTodo, toggleTodo, deleteTodo } =
     useTodos();
 
   const [filter, setFilter] = useState('all'); // all, active, done
 
-  // ✅ 5. 필터링된 목록 계산
+  // 필터링된 목록 계산
   const filteredTodos = todos.filter(todo => {
     if (filter === 'active') return !todo.done;
     if (filter === 'done') return todo.done;
@@ -33,6 +34,8 @@ const App = () => {
         onToggle={toggleTodo}
         onDelete={deleteTodo}
       />
+
+      <ConfirmModal />
     </div>
   );
 };
