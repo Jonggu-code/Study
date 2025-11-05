@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+/* === Tailwind v4: CSS-first configuration === */
+@theme {
+  --font-sans: "Pretendard Variable", sans-serif;
+  --color-primary: #2563eb; /* blue-600 */
+  --color-secondary: #64748b; /* slate-500 */
+  --color-background: #f9fafb; /* gray-50 */
+  --color-surface: #ffffff; /* white */
+  --color-text: #1e293b; /* slate-800 */
+  --color-muted: #94a3b8; /* slate-400 */
+  --radius: 0.75rem;
+}
+
+/* === 글로벌 스타일 === */
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    background-color: var(--color-background);
+    color: var(--color-text);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-semibold text-gray-900;
+  }
+
+  p {
+    @apply text-gray-700 leading-relaxed;
+  }
+
+  a {
+    @apply text-primary hover:text-blue-500 transition-colors;
+  }
+
+  button {
+    @apply transition-colors;
+  }
+}
