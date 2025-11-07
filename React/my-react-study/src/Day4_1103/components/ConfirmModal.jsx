@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ConfirmModal = () => {
-  return <div>ConfirmModal</div>;
+  return <div></div>;
 };
 
 export default ConfirmModal;
