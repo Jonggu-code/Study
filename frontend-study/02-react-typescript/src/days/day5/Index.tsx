@@ -1,85 +1,44 @@
-// 타입 좁히기 (Type Narrowing)
-
-function printId(id: string | number) {
-  if (typeof id === 'string') {
-    console.log('ID (문자열) : ', id.toUpperCase());
-  } else {
-    console.log('ID (숫자) : ', id.toFixed(2));
-  }
-}
-
-// typeof를 이용한 기본 타입 좁히기
-
-// in 연산자를 이용한 객체 타입 좁히기
-
-interface Admin {
-  name: string;
-  privileges: string[];
-}
+import axios from 'axios';
+import { useEffect, useRef, useState } from 'react';
 
 interface User {
+  id: number;
   name: string;
   email: string;
 }
 
-function describePerson(person: Admin | User) {
-  if ('privileges' in person) {
-    console.log(
-      '관리자 : ',
-      person.name,
-      '| 권한 : ',
-      person.privileges.join(', '),
-    );
-  } else {
-    console.log('일반 유저 : ', person.name, '| 이메일 : ', person.email);
-  }
-}
-
-// instanceof 를 이용한 클래스 타입 좁히기
-
-class Dog {
-  bark() {
-    console.log('멍멍!');
-  }
-}
-
-class Cat {
-  meow() {
-    console.log('야옹!');
-  }
-}
-
-function makeSound(animal: Dog | Cat) {
-  if (animal instanceof Dog) animal.bark();
-  else animal.meow();
-}
-
-// 사용자 정의 타입 가드 (User-Defined Type Guard)
-
-interface Fish {
-  swim: () => void;
-}
-
-interface Bird {
-  fly: () => void;
-}
-
-function isFish(pet: Fish | Bird): pet is Fish {
-  return (pet as Fish).swim !== undefined;
-}
-
-function move(pet: Fish | Bird) {
-  if (isFish(pet)) pet.swim();
-  else pet.fly();
-}
-
-move({ swim: () => console.log('물살을 가르다 !') });
-move({ fly: () => console.log('하늘을 날다 !') });
-
-import React, { useEffect } from 'react';
-
 const Index = () => {
-  return <div></div>;
+  const [count, setCount] = useState<number>(0);
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    axios
+      .get<User>('https://jsonplaceholder.typicode.com/users/1')
+      .then((res) => console.log('📦 User Name:', res.data.name));
+  }, []);
+
+  const btnBox = 'p-4 border';
+
+  return (
+    <div className="p-6">
+      <h2>react 속 제네릭 테스트</h2>
+
+      {/* useState */}
+      <p>현재 카운트 : {count}</p>
+      <button className={btnBox} onClick={() => setCount(count + 1)}>
+        +
+      </button>
+      <button className={btnBox} onClick={() => setCount(count - 1)}>
+        -
+      </button>
+
+      {/* useRef */}
+      <div className="mt-4">
+        <input ref={inputRef} placeholder="자동 포커스 input" />
+      </div>
+    </div>
+  );
 };
 
 export default Index;
