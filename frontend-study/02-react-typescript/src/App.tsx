@@ -1,4 +1,4 @@
-import Index from './days/day9/Index';
+import Index from './days/day10/Index';
 
 function App() {
   return (
