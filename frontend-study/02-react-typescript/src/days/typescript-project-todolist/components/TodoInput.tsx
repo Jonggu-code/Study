@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { TodoInputProps } from '../types/props';
 
-function TodoInput({ addTodo }: TodoInputProps) {
+function TodoInput({ addTodo, setAlert }: TodoInputProps) {
   const [text, setText] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -12,7 +12,8 @@ function TodoInput({ addTodo }: TodoInputProps) {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!text.trim()) {
-      alert('할 일은 빈칸일 수 없습니다.');
+      setAlert('빈칸은 입력할 수 없어요 !');
+      setTimeout(() => setAlert(null), 1000);
       return;
     }
     addTodo(text);
@@ -26,7 +27,7 @@ function TodoInput({ addTodo }: TodoInputProps) {
       onSubmit={handleSubmit}
     >
       <input
-        className="w-[90%] px-3 rounded bg-white transition-all duration-300 focus:outline-none focus:ring-green-600 focus:ring-2"
+        className="w-[90%] px-3 rounded bg-white transition-all duration-300  focus:ring-lime-600 focus:ring-2"
         ref={inputRef}
         type="text"
         placeholder="오늘의 할 일은 무엇인가요?"
@@ -34,7 +35,7 @@ function TodoInput({ addTodo }: TodoInputProps) {
         onChange={(e) => setText(e.target.value)}
       />
       <button
-        className='w-[10%] box-border rounded-sm p-3 bg-green-600 text-sm text-white font-bold cursor-pointer hover:bg-green-800"'
+        className='w-[10%] box-border rounded-sm p-3 bg-lime-600 text-sm text-white font-bold cursor-pointer hover:bg-green-800"'
         type="submit"
       >
         추가

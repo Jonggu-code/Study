@@ -1,7 +1,12 @@
 import { TodoListProps } from '../types/props';
 import TodoItem from './TodoItem';
 
-function TodoList({ todos, toggleTodo, deleteTodo }: TodoListProps) {
+function TodoList({
+  todos,
+  toggleTodo,
+  openConfirm,
+  deleteTarget,
+}: TodoListProps) {
   if (todos.length === 0)
     return <p className="mt-3.5">항목이 비어있습니다 ✨</p>;
 
@@ -12,7 +17,8 @@ function TodoList({ todos, toggleTodo, deleteTodo }: TodoListProps) {
           key={todo.id}
           todo={todo}
           toggleTodo={toggleTodo}
-          deleteTodo={deleteTodo}
+          openConfirm={openConfirm}
+          deleteTarget={deleteTarget}
         />
       ))}
     </ul>

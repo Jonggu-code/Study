@@ -9,11 +9,11 @@ export default function FilterBtn({ filter, setFilter }: FilterBtnProps) {
 
   const baseStyle =
     'px-4 py-2 rounded cursor-pointer font-bold transition duration-300';
-  const activeStyle = 'bg-green-600 text-white';
-  const inactiveStyle = 'bg-green-200 text-gray hover:bg-green-300';
+  const activeStyle = 'bg-lime-600 text-white';
+  const inactiveStyle = 'bg-lime-300 text-gray hover:bg-lime-400';
 
   return (
-    <div className="mt-5 mb-5 flex gap-2 w-full justify-center text-white">
+    <div className="mt-5 mb-5 flex gap-2 w-full justify-center text-gray-100">
       {buttons.map((btn) => {
         const isActive = filter === btn.type;
 
