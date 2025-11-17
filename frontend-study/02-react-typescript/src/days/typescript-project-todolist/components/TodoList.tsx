@@ -1,8 +1,11 @@
+import { Reorder } from 'framer-motion';
 import { TodoListProps } from '../types/props';
 import TodoItem from './TodoItem';
+import { useState } from 'react';
 
 function TodoList({
   todos,
+  setTodos,
   toggleTodo,
   openConfirm,
   deleteTarget,
@@ -11,19 +14,37 @@ function TodoList({
   if (todos.length === 0)
     return <p className="mt-3.5">항목이 비어있습니다 ✨</p>;
 
+  const [draggingId, setDraggingId] = useState<number | null>(null);
+
   return (
-    <ul>
+    <Reorder.Group
+      axis="y"
+      values={todos}
+      onReorder={(newOrder) => setTodos(newOrder)}
+      className="flex flex-col gap-2"
+    >
       {todos.map((todo) => (
-        <TodoItem
+        <Reorder.Item
           key={todo.id}
-          todo={todo}
-          toggleTodo={toggleTodo}
-          openConfirm={openConfirm}
-          deleteTarget={deleteTarget}
-          updateTodo={updateTodo}
-        />
+          value={todo}
+          dragListener={true}
+          whileDrag={{ scale: 1.02 }}
+          animate={{ scale: 1 }}
+          transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+          onDragStart={() => setDraggingId(null)}
+          onDragEnd={() => setDraggingId(null)}
+        >
+          <TodoItem
+            todo={todo}
+            toggleTodo={toggleTodo}
+            openConfirm={openConfirm}
+            deleteTarget={deleteTarget}
+            updateTodo={updateTodo}
+            dragging={draggingId === todo.id}
+          />
+        </Reorder.Item>
       ))}
-    </ul>
+    </Reorder.Group>
   );
 }
 

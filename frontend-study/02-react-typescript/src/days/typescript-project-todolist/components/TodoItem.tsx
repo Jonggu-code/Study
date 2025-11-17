@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useTodoItem } from '../hooks/useTodoItem';
 import { TodoItemProps } from '../types/props';
 
 function TodoItem({
@@ -7,10 +7,25 @@ function TodoItem({
   openConfirm,
   deleteTarget,
   updateTodo,
+  dragging,
 }: TodoItemProps) {
-  const [removing, setRemoving] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
-  const [editText, setEditText] = useState(todo.text);
+  const {
+    removing,
+
+    isEditing,
+    setIsEditing,
+
+    editText,
+    setEditText,
+
+    startY,
+    setStartY,
+    clickedInside,
+    setClickedInside,
+
+    startEdit,
+    cancelEdit,
+  } = useTodoItem(todo, deleteTarget);
 
   const btnStyle = 'p-2 transition duration-300 rounded-sm hover:bg-lime-500';
 
@@ -20,90 +35,102 @@ function TodoItem({
     updateTodo(todo.id, trimmed);
     setIsEditing(false);
   };
-  const cancelEdit = () => {
-    setEditText(todo.text);
-    setIsEditing(false);
-  };
-
-  useEffect(() => {
-    if (deleteTarget === todo.id) {
-      setRemoving(true);
-    }
-  }, [deleteTarget]);
 
   return (
-    <li
-      className={`flex items-center justify-center gap-2 py-4 mb-3 hover:shadow-sm rounded-md transition-all duration-200 ease-in-out cursor-pointer ${removing ? 'slide-out-left' : ''} ${
+    <div
+      className={`relative flex items-center justify-between px-4 py-3 mb-2 rounded-md shadow cursor-grab active:cursor-grabbing transition-all duration-200  ${removing ? 'slide-out-left' : ''} ${
         todo.completed
           ? 'bg-lime-600 text-white font-bold'
           : 'bg-white hover:text-lime-600 bg-'
-      }`}
-      onClick={() => {
-        if (!isEditing) toggleTodo(todo.id);
+      } `}
+      onMouseDown={(e) => {
+        setStartY(e.clientY);
+      }}
+      onMouseUp={(e) => {
+        if (clickedInside) {
+          setClickedInside(false);
+          return;
+        }
+
+        if (startY === null) return;
+        const diff = Math.abs(e.clientY - startY);
+
+        if (diff > 5) return;
+        if (dragging) return;
+        if (isEditing) {
+          return;
+        }
       }}
     >
-      <input
-        type="checkbox"
-        checked={todo.completed}
-        onChange={() => toggleTodo(todo.id)}
-      />
-      {isEditing ? (
+      <div className="flex items-center gap-2 flex-1">
         <input
-          className="w-[70%]"
-          value={editText}
-          onChange={(e) => setEditText(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') handleSave();
-            if (e.key === 'Escape') cancelEdit();
-          }}
+          type="checkbox"
+          checked={todo.completed}
+          onClick={(e) => e.stopPropagation()}
+          onChange={() => toggleTodo(todo.id)}
         />
-      ) : (
-        <span className="w-[70%]">{todo.text} </span>
-      )}
-      {isEditing ? (
-        <>
-          <button
-            className={`${btnStyle}`}
-            onClick={(e) => {
-              e.stopPropagation();
-              handleSave;
+        {isEditing ? (
+          <input
+            className="flex-1"
+            value={editText}
+            onChange={(e) => setEditText(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') handleSave();
+              if (e.key === 'Escape') cancelEdit();
             }}
-          >
-            ✅
-          </button>
-          <button
-            className={`${btnStyle}`}
-            onClick={(e) => {
-              e.stopPropagation();
-              cancelEdit;
-            }}
-          >
-            ❌
-          </button>
-        </>
-      ) : (
-        <>
-          <button
-            className={`${btnStyle}`}
-            onClick={(e) => {
-              e.stopPropagation();
-              setIsEditing(true);
-            }}
-          >
-            📝
-          </button>
-          <button
-            className={`${btnStyle}`}
-            onClick={(e) => {
-              e.stopPropagation();
-              openConfirm(todo.id, todo.text);
-            }}
-          >
-            🗑️
-          </button>
-        </>
-      )}
-    </li>
+          />
+        ) : (
+          <span className="flex-1">{todo.text} </span>
+        )}
+        {isEditing ? (
+          <>
+            <button
+              className={`${btnStyle}`}
+              onClickCapture={() => setClickedInside(true)}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleSave();
+              }}
+            >
+              ✅
+            </button>
+            <button
+              className={`${btnStyle}`}
+              onClickCapture={() => setClickedInside(true)}
+              onClick={(e) => {
+                e.stopPropagation();
+                cancelEdit();
+              }}
+            >
+              ❌
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              className={`${btnStyle}`}
+              onClickCapture={() => setClickedInside(true)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsEditing(true);
+              }}
+            >
+              📝
+            </button>
+            <button
+              className={`${btnStyle}`}
+              onClickCapture={() => setClickedInside(true)}
+              onClick={(e) => {
+                e.stopPropagation();
+                openConfirm(todo.id, todo.text);
+              }}
+            >
+              🗑️
+            </button>
+          </>
+        )}
+      </div>
+    </div>
   );
 }
 

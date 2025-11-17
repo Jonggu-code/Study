@@ -11,10 +11,12 @@ export interface TodoItemProps {
   openConfirm: (id: number, text: string) => void;
   deleteTarget: number | null;
   updateTodo: (id: number, text: string) => void;
+  dragging: boolean;
 }
 
 export interface TodoListProps {
   todos: Todo[];
+  setTodos: (newOrder: Todo[]) => void;
   toggleTodo: (id: number) => void;
   openConfirm: (id: number, text: string) => void;
   deleteTarget: number | null;
