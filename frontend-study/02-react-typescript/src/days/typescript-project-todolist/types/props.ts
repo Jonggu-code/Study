@@ -2,7 +2,7 @@ import { Todo } from './todo';
 
 export interface TodoInputProps {
   addTodo: (text: string) => void;
-  setAlert: React.Dispatch<React.SetStateAction<string | null>>;
+  showAlert: (msg: string) => void;
 }
 
 export interface TodoItemProps {
@@ -10,6 +10,7 @@ export interface TodoItemProps {
   toggleTodo: (id: number) => void;
   openConfirm: (id: number, text: string) => void;
   deleteTarget: number | null;
+  updateTodo: (id: number, text: string) => void;
 }
 
 export interface TodoListProps {
@@ -17,6 +18,7 @@ export interface TodoListProps {
   toggleTodo: (id: number) => void;
   openConfirm: (id: number, text: string) => void;
   deleteTarget: number | null;
+  updateTodo: (id: number, text: string) => void;
 }
 
 export interface FilterBtnProps {
@@ -25,5 +27,5 @@ export interface FilterBtnProps {
 }
 
 export interface AlertModalProps {
-  message: string;
+  message: string | null;
 }

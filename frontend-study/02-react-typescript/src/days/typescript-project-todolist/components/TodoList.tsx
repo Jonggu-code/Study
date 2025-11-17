@@ -6,6 +6,7 @@ function TodoList({
   toggleTodo,
   openConfirm,
   deleteTarget,
+  updateTodo,
 }: TodoListProps) {
   if (todos.length === 0)
     return <p className="mt-3.5">항목이 비어있습니다 ✨</p>;
@@ -19,6 +20,7 @@ function TodoList({
           toggleTodo={toggleTodo}
           openConfirm={openConfirm}
           deleteTarget={deleteTarget}
+          updateTodo={updateTodo}
         />
       ))}
     </ul>

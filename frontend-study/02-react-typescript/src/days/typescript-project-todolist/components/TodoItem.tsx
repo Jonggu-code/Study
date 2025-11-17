@@ -6,10 +6,24 @@ function TodoItem({
   toggleTodo,
   openConfirm,
   deleteTarget,
+  updateTodo,
 }: TodoItemProps) {
   const [removing, setRemoving] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editText, setEditText] = useState(todo.text);
 
-  const btnStyle = 'p-2 transition duration-300 rounded-sm';
+  const btnStyle = 'p-2 transition duration-300 rounded-sm hover:bg-lime-500';
+
+  const handleSave = () => {
+    const trimmed = editText.trim();
+    if (!trimmed) return; // 필요하면 alert 사용 가능
+    updateTodo(todo.id, trimmed);
+    setIsEditing(false);
+  };
+  const cancelEdit = () => {
+    setEditText(todo.text);
+    setIsEditing(false);
+  };
 
   useEffect(() => {
     if (deleteTarget === todo.id) {
@@ -24,8 +38,8 @@ function TodoItem({
           ? 'bg-lime-600 text-white font-bold'
           : 'bg-white hover:text-lime-600 bg-'
       }`}
-      onClick={(e) => {
-        toggleTodo(todo.id);
+      onClick={() => {
+        if (!isEditing) toggleTodo(todo.id);
       }}
     >
       <input
@@ -33,16 +47,62 @@ function TodoItem({
         checked={todo.completed}
         onChange={() => toggleTodo(todo.id)}
       />
-      <span className="w-[80%]">{todo.text}</span>
-      <button
-        className={`${btnStyle} ${todo.completed ? 'hover:bg-lime-700' : 'hover:bg-green-100'}`}
-        onClick={(e) => {
-          e.stopPropagation();
-          openConfirm(todo.id, todo.text);
-        }}
-      >
-        🗑️
-      </button>
+      {isEditing ? (
+        <input
+          className="w-[70%]"
+          value={editText}
+          onChange={(e) => setEditText(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') handleSave();
+            if (e.key === 'Escape') cancelEdit();
+          }}
+        />
+      ) : (
+        <span className="w-[70%]">{todo.text} </span>
+      )}
+      {isEditing ? (
+        <>
+          <button
+            className={`${btnStyle}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleSave;
+            }}
+          >
+            ✅
+          </button>
+          <button
+            className={`${btnStyle}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              cancelEdit;
+            }}
+          >
+            ❌
+          </button>
+        </>
+      ) : (
+        <>
+          <button
+            className={`${btnStyle}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsEditing(true);
+            }}
+          >
+            📝
+          </button>
+          <button
+            className={`${btnStyle}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              openConfirm(todo.id, todo.text);
+            }}
+          >
+            🗑️
+          </button>
+        </>
+      )}
     </li>
   );
 }

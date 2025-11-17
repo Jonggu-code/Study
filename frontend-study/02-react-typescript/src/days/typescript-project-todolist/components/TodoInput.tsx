@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { TodoInputProps } from '../types/props';
 
-function TodoInput({ addTodo, setAlert }: TodoInputProps) {
+function TodoInput({ addTodo, showAlert }: TodoInputProps) {
   const [text, setText] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -12,8 +12,7 @@ function TodoInput({ addTodo, setAlert }: TodoInputProps) {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!text.trim()) {
-      setAlert('빈칸은 입력할 수 없어요 !');
-      setTimeout(() => setAlert(null), 1000);
+      showAlert('빈칸은 입력할 수 없어요 !');
       return;
     }
     addTodo(text);
