@@ -1,5 +1,5 @@
-import { AlertModalProps } from '../types/props';
 import { motion, AnimatePresence } from 'framer-motion';
+import { AlertModalProps } from '../../../types/props';
 
 export default function AlertModal({ message }: AlertModalProps) {
   return (

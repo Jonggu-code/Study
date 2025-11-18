@@ -1,4 +1,4 @@
-import { FilterBtnProps } from '../types/props';
+import { FilterBtnProps } from '../../types/props';
 
 export default function FilterBtn({ filter, setFilter }: FilterBtnProps) {
   const buttons: { type: 'all' | 'todo' | 'done'; label: string }[] = [

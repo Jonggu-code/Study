@@ -1,5 +1,5 @@
-import { UndoProps } from '../types/props';
-import UndoIcon from './icons/UndoIcon';
+import { UndoProps } from '../../types/props';
+import UndoIcon from '../ui/icons/UndoIcon';
 
 export default function UndoBar({
   lastDeleted,

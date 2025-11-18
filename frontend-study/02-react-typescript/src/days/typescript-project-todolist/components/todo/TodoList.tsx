@@ -1,7 +1,7 @@
 import { Reorder } from 'framer-motion';
-import { TodoListProps } from '../types/props';
-import TodoItem from './TodoItem';
 import { useState } from 'react';
+import { TodoListProps } from '../../types/props';
+import TodoItem from './TodoItem';
 
 function TodoList({
   todos,

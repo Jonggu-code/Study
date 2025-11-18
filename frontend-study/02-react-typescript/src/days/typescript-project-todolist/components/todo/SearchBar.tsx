@@ -1,8 +1,8 @@
 import { useRef } from 'react';
-import { SearchProps } from '../types/props';
-import CancelIcon from './icons/CancelIcon';
-import SearchIcon from './icons/SearchIcon';
-import { useAutoFocus } from '../hooks/useAutoFocus';
+import { SearchProps } from '../../types/props';
+import CancelIcon from '../ui/icons/CancelIcon';
+import SearchIcon from '../ui/icons/SearchIcon';
+import { useAutoFocus } from '../../hooks/useAutoFocus';
 
 export default function SearchBar({
   search,

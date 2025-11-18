@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { TodoInputProps } from '../types/props';
-import { useAutoFocus } from '../hooks/useAutoFocus';
+import { TodoInputProps } from '../../types/props';
+import { useAutoFocus } from '../../hooks/useAutoFocus';
 
 function TodoInput({ addTodo, showAlert }: TodoInputProps) {
   const [text, setText] = useState('');

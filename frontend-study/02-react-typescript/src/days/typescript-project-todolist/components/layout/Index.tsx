@@ -1,14 +1,14 @@
-import TodoInput from './TodoInput';
-import TodoList from './TodoList';
-import FilterBtn from './FilterBtn';
-import AlertModal from './AlertModal';
-import ConfirmModal from './ConfirmModal';
-import { useTodo } from '../hooks/useTodo';
-import { useAlert } from '../hooks/useAlert';
-import SearchBar from './SearchBar';
-import UndoBar from './UndoBar';
-import { Spinner } from './icons/Spinner';
-import LoadingDots from './LoadingDots';
+import TodoInput from '../todo/TodoInput';
+import TodoList from '../todo/TodoList';
+import FilterBtn from '../todo/FilterBtn';
+import AlertModal from '../ui/Modal/AlertModal';
+import ConfirmModal from '../ui/Modal/ConfirmModal';
+import { useTodo } from '../../hooks/useTodo';
+import { useAlert } from '../../hooks/useAlert';
+import SearchBar from '../todo/SearchBar';
+import UndoBar from '../todo/UndoBar';
+import { Spinner } from '../ui/Spinner';
+import LoadingDots from '../ui/LoadingDots';
 
 function Index() {
   const {

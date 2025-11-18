@@ -1,6 +1,6 @@
-import { useClickGuard } from '../hooks/useClickGuard';
-import { useTodoItem } from '../hooks/useTodoItem';
-import { TodoItemProps } from '../types/props';
+import { useClickGuard } from '../../hooks/useClickGuard';
+import { useTodoItem } from '../../hooks/useTodoItem';
+import { TodoItemProps } from '../../types/props';
 
 function TodoItem({
   todo,

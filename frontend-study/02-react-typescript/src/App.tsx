@@ -1,4 +1,4 @@
-import Index from './days/typescript-project-todolist/components/Index';
+import Index from './days/typescript-project-todolist/components/layout/Index';
 
 function App() {
   return (
