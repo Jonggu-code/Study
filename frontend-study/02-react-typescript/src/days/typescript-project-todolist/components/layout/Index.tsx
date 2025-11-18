@@ -9,6 +9,7 @@ import SearchBar from '../todo/SearchBar';
 import UndoBar from '../todo/UndoBar';
 import { Spinner } from '../ui/Spinner';
 import LoadingDots from '../ui/LoadingDots';
+import TodayLabel from '../todo/TodayLabel';
 
 function Index() {
   const {
@@ -51,7 +52,10 @@ function Index() {
   }
   return (
     <div className="relative text-gray-700 p-5 border-2 border-lime-500 m-1 box-border w-xl h-max bg-lime-100">
-      <h2 className="text-3xl font-bold text-center mb-5">🧩 To do List 🧩</h2>
+      <div className="flex justify-between items-end mb-5 px-2">
+        <h2 className="text-3xl font-bold">🧩 To do List</h2>
+        <TodayLabel />
+      </div>
       <TodoInput addTodo={addTodo} showAlert={showAlert} />
       <div className="flex justify-between items-center mb-5">
         <SearchBar
