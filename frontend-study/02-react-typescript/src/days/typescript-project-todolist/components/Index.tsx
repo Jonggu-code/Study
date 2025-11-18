@@ -7,14 +7,16 @@ import { useTodo } from '../hooks/useTodo';
 import { useAlert } from '../hooks/useAlert';
 import SearchBar from './SearchBar';
 import UndoBar from './UndoBar';
+import { Spinner } from './icons/Spinner';
+import LoadingDots from './LoadingDots';
 
 function Index() {
   const {
-    todos,
     setTodos,
     addTodo,
     updateTodo,
     toggleTodo,
+    loading,
 
     filter,
     setFilter,
@@ -24,11 +26,8 @@ function Index() {
     searchOn,
     setSearchOn,
 
-    deleteTodo,
     lastDeleted,
     setLastDeleted,
-    undoTimer,
-    setUndoTimer,
 
     filteredTodos,
 
@@ -40,15 +39,19 @@ function Index() {
     deleteTarget,
   } = useTodo();
 
-  const {
-    alert,
+  const { alert, showAlert } = useAlert();
 
-    showAlert,
-  } = useAlert();
-
+  if (loading) {
+    return (
+      <div className="flex flex-col items-center text-center mt-20 gap-10">
+        <Spinner />
+        <LoadingDots />
+      </div>
+    );
+  }
   return (
     <div className="relative text-gray-700 p-5 border-2 border-lime-500 m-1 box-border w-xl h-max bg-lime-100">
-      <h2 className="text-3xl font-bold mb-5">🧩 To do List</h2>
+      <h2 className="text-3xl font-bold text-center mb-5">🧩 To do List 🧩</h2>
       <TodoInput addTodo={addTodo} showAlert={showAlert} />
       <div className="flex justify-between items-center mb-5">
         <SearchBar

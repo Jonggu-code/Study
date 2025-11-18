@@ -3,11 +3,17 @@ import { useLocalStorage } from './useLocalStorage';
 import { Todo } from '../types/todo';
 
 export const useTodo = () => {
-  const [todos, setTodos] = useLocalStorage<Todo[]>('todos', []);
+  const {
+    value: todos,
+    setValue: setTodos,
+    loading,
+  } = useLocalStorage<Todo[]>('todos', []);
+
   const [confirm, setConfirm] = useState<{
     id: number;
     text: string;
   } | null>(null);
+
   const [deleteTarget, setDeleteTarget] = useState<number | null>(null);
   const [filter, setFilter] = useState<'all' | 'done' | 'todo'>('all');
 
@@ -15,6 +21,7 @@ export const useTodo = () => {
   const [search, setSearch] = useState('');
   const [searchOn, setSearchOn] = useState(false);
 
+  // 삭제 되돌리기 용 상태관리
   const [lastDeleted, setLastDeleted] = useState<Todo | null>(null);
   const [undoTimer, setUndoTimer] = useState<number | null>(null);
 
@@ -31,11 +38,13 @@ export const useTodo = () => {
     return true;
   });
 
+  // 새로운 할 일 추가
   const addTodo = (text: string) => {
     const newTodo: Todo = { id: Date.now(), text, completed: false };
     setTodos([...todos, newTodo]);
   };
 
+  // 할 일 수정
   const updateTodo = (id: number, text: string) => {
     setTodos(todos.map((todo) => (todo.id === id ? { ...todo, text } : todo)));
   };
@@ -49,7 +58,7 @@ export const useTodo = () => {
     );
   };
 
-  // 할 일 삭제 기능
+  // 할 일 삭제 기능 + 삭제 복구를 위한 targetid 설정
   const deleteTodo = (id: number) => {
     const target = todos.find((t) => t.id === id) || null;
     setTodos(todos.filter((todo) => todo.id !== id));
@@ -84,13 +93,13 @@ export const useTodo = () => {
       setDeleteTarget(null); // 상태 리셋
     }, 200); // slide-out 애니메이션 시간과 동일하게 세팅
   };
-
   return {
     todos,
     setTodos,
     addTodo,
     updateTodo,
     toggleTodo,
+    loading,
 
     search,
     setSearch,

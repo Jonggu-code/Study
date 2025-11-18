@@ -1,6 +1,8 @@
+import { useRef } from 'react';
 import { SearchProps } from '../types/props';
 import CancelIcon from './icons/CancelIcon';
 import SearchIcon from './icons/SearchIcon';
+import { useAutoFocus } from '../hooks/useAutoFocus';
 
 export default function SearchBar({
   search,
@@ -8,13 +10,12 @@ export default function SearchBar({
   searchOn,
   setSearchOn,
 }: SearchProps) {
+  const inputRef = useAutoFocus<HTMLInputElement>(searchOn);
   return (
     <div
       className={`p-2 flex ${searchOn ? 'w-120 bg-lime-200' : 'overflow-hidden w-12 hover:bg-lime-200'} rounded-xl transition-all duration-300 cursor-pointer`}
     >
-      <button
-        onClick={() => (searchOn ? setSearchOn(false) : setSearchOn(true))}
-      >
+      <button onClick={() => setSearchOn(!searchOn)}>
         <SearchIcon
           className="cursor-pointer w-7 mr-2 text-lime-400"
           strokeWidth={2.5}
@@ -23,6 +24,7 @@ export default function SearchBar({
       {searchOn ? (
         <div className="flex justify-between">
           <input
+            ref={inputRef}
             className="w-[90%] focus:outline-none focus:border-0"
             type="text"
             placeholder="내용 검색"

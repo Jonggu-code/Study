@@ -1,13 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { TodoInputProps } from '../types/props';
+import { useAutoFocus } from '../hooks/useAutoFocus';
 
 function TodoInput({ addTodo, showAlert }: TodoInputProps) {
   const [text, setText] = useState('');
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
+  const inputRef = useAutoFocus<HTMLInputElement>(true);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

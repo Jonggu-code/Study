@@ -19,16 +19,11 @@ function TodoItem({
     editText,
     setEditText,
 
-    startY,
-    setStartY,
-    clickedInside,
-    setClickedInside,
-
     startEdit,
     cancelEdit,
   } = useTodoItem(todo, deleteTarget);
 
-  const { registerDown, registerInsideClick, shouldToggle } = useClickGuard();
+  const { registerDown, shouldToggle } = useClickGuard();
 
   const btnStyle = 'p-2 transition duration-300 rounded-sm hover:bg-lime-500';
 
@@ -77,7 +72,6 @@ function TodoItem({
           <>
             <button
               className={`${btnStyle}`}
-              onClickCapture={() => setClickedInside(true)}
               onClick={(e) => {
                 e.stopPropagation();
                 handleSave();
@@ -87,7 +81,6 @@ function TodoItem({
             </button>
             <button
               className={`${btnStyle}`}
-              onClickCapture={() => setClickedInside(true)}
               onClick={(e) => {
                 e.stopPropagation();
                 cancelEdit();
@@ -100,7 +93,6 @@ function TodoItem({
           <>
             <button
               className={`${btnStyle}`}
-              onClickCapture={() => setClickedInside(true)}
               onClick={(e) => {
                 e.stopPropagation();
                 setIsEditing(true);
@@ -110,7 +102,6 @@ function TodoItem({
             </button>
             <button
               className={`${btnStyle}`}
-              onClickCapture={() => setClickedInside(true)}
               onClick={(e) => {
                 e.stopPropagation();
                 openConfirm(todo.id, todo.text);
