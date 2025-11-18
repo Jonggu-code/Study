@@ -1,3 +1,4 @@
+import { useClickGuard } from '../hooks/useClickGuard';
 import { useTodoItem } from '../hooks/useTodoItem';
 import { TodoItemProps } from '../types/props';
 
@@ -27,6 +28,8 @@ function TodoItem({
     cancelEdit,
   } = useTodoItem(todo, deleteTarget);
 
+  const { registerDown, registerInsideClick, shouldToggle } = useClickGuard();
+
   const btnStyle = 'p-2 transition duration-300 rounded-sm hover:bg-lime-500';
 
   const handleSave = () => {
@@ -43,22 +46,10 @@ function TodoItem({
           ? 'bg-lime-600 text-white font-bold'
           : 'bg-white hover:text-lime-600 bg-'
       } `}
-      onMouseDown={(e) => {
-        setStartY(e.clientY);
-      }}
+      onMouseDown={registerDown}
       onMouseUp={(e) => {
-        if (clickedInside) {
-          setClickedInside(false);
-          return;
-        }
-
-        if (startY === null) return;
-        const diff = Math.abs(e.clientY - startY);
-
-        if (diff > 5) return;
-        if (dragging) return;
-        if (isEditing) {
-          return;
+        if (shouldToggle(e, { dragging, isEditing })) {
+          toggleTodo(todo.id);
         }
       }}
     >

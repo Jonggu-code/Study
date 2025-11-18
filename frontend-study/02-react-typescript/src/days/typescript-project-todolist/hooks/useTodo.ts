@@ -10,13 +10,24 @@ export const useTodo = () => {
   } | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<number | null>(null);
   const [filter, setFilter] = useState<'all' | 'done' | 'todo'>('all');
+
   // 할 일 검색용 상태 관리
   const [search, setSearch] = useState('');
+  const [searchOn, setSearchOn] = useState(false);
+
+  const [lastDeleted, setLastDeleted] = useState<Todo | null>(null);
+  const [undoTimer, setUndoTimer] = useState<number | null>(null);
 
   // 할 일 상태에 따른 필터링 여부
   const filteredTodos = todos.filter((todo) => {
-    if (filter === 'done') return todo.completed;
-    if (filter === 'todo') return !todo.completed;
+    if (filter === 'done') if (!todo.completed) return false;
+    if (filter === 'todo') if (todo.completed) return false;
+    if (
+      search.trim() &&
+      !todo.text.toLowerCase().includes(search.toLowerCase())
+    ) {
+      return false;
+    }
     return true;
   });
 
@@ -40,7 +51,20 @@ export const useTodo = () => {
 
   // 할 일 삭제 기능
   const deleteTodo = (id: number) => {
+    const target = todos.find((t) => t.id === id) || null;
     setTodos(todos.filter((todo) => todo.id !== id));
+    setLastDeleted(target);
+
+    if (undoTimer) {
+      window.clearTimeout(undoTimer);
+    }
+
+    const timerId = window.setTimeout(() => {
+      setLastDeleted(null);
+      setUndoTimer(null);
+    }, 10000);
+
+    setUndoTimer(timerId);
   };
 
   // 할 일 삭제버튼 클릭 시 모달창 띄우는 기능
@@ -67,7 +91,17 @@ export const useTodo = () => {
     addTodo,
     updateTodo,
     toggleTodo,
+
+    search,
+    setSearch,
+    searchOn,
+    setSearchOn,
+
     deleteTodo,
+    lastDeleted,
+    setLastDeleted,
+    undoTimer,
+    setUndoTimer,
 
     filter,
     setFilter,

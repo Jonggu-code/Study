@@ -4,6 +4,7 @@ export default function ConfirmModal({
   text,
   onConfirm,
   onCancel,
+  showAlert,
 }: ConfirmModalProps) {
   const btnStyle = 'transition duration-100 py-3 px-4 rounded cursor-pointer';
 
@@ -15,7 +16,10 @@ export default function ConfirmModal({
         <div className="flex justify-center mt-2 gap-2 text-white font-bold">
           <button
             className={`${btnStyle} bg-lime-600 hover:bg-lime-700`}
-            onClick={onConfirm}
+            onClick={() => {
+              onConfirm();
+              showAlert(`"${text}" 가 삭제되었습니다.`);
+            }}
           >
             확인
           </button>

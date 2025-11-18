@@ -13,7 +13,7 @@ export default function FilterBtn({ filter, setFilter }: FilterBtnProps) {
   const inactiveStyle = 'bg-lime-300 text-gray hover:bg-lime-400';
 
   return (
-    <div className="mt-5 mb-5 flex gap-2 w-full justify-center text-gray-100">
+    <div className="flex gap-2 w-full justify-center text-gray-100">
       {buttons.map((btn) => {
         const isActive = filter === btn.type;
 

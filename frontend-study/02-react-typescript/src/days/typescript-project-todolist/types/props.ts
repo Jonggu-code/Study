@@ -31,3 +31,17 @@ export interface FilterBtnProps {
 export interface AlertModalProps {
   message: string | null;
 }
+
+export interface SearchProps {
+  search: string;
+  setSearch: (value: string) => void;
+  searchOn: boolean;
+  setSearchOn: (value: boolean) => void;
+}
+
+export interface UndoProps {
+  lastDeleted: Todo | null;
+  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+  setLastDeleted: React.Dispatch<React.SetStateAction<Todo | null>>;
+  showAlert: (msg: string) => void;
+}
