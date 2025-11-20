@@ -1,10 +1,11 @@
+import { FILTERS, FilterType } from '../../types/filter';
 import { FilterBtnProps } from '../../types/props';
 
 export default function FilterBtn({ filter, setFilter }: FilterBtnProps) {
-  const buttons: { type: 'all' | 'todo' | 'done'; label: string }[] = [
-    { type: 'all', label: '전체' },
-    { type: 'todo', label: '미완료' },
-    { type: 'done', label: '완료' },
+  const buttons: { type: FilterType; label: string }[] = [
+    { type: FILTERS.ALL, label: '전체' },
+    { type: FILTERS.TODO, label: '미완료' },
+    { type: FILTERS.DONE, label: '완료' },
   ];
 
   const baseStyle =

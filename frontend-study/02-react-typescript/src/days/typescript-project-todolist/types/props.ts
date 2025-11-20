@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+import { FilterType } from './filter';
 import { Todo } from './todo';
 
 export interface TodoInputProps {
@@ -24,8 +26,8 @@ export interface TodoListProps {
 }
 
 export interface FilterBtnProps {
-  filter: 'all' | 'done' | 'todo';
-  setFilter: React.Dispatch<React.SetStateAction<'all' | 'done' | 'todo'>>;
+  filter: FilterType;
+  setFilter: Dispatch<SetStateAction<FilterType>>;
 }
 
 export interface AlertModalProps {
@@ -44,4 +46,8 @@ export interface UndoProps {
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
   setLastDeleted: React.Dispatch<React.SetStateAction<Todo | null>>;
   showAlert: (msg: string) => void;
+}
+
+export interface StatsBarProps {
+  todos: Todo[];
 }

@@ -1,3 +1,4 @@
+import { useAutoFocus } from '../../hooks/useAutoFocus';
 import { useClickGuard } from '../../hooks/useClickGuard';
 import { useTodoItem } from '../../hooks/useTodoItem';
 import { TodoItemProps } from '../../types/props';
@@ -24,6 +25,7 @@ function TodoItem({
   } = useTodoItem(todo, deleteTarget);
 
   const { registerDown, shouldToggle } = useClickGuard();
+  const inputRef = useAutoFocus<HTMLInputElement>(isEditing);
 
   const btnStyle = 'p-2 transition duration-300 rounded-sm hover:bg-lime-500';
 
@@ -57,7 +59,8 @@ function TodoItem({
         />
         {isEditing ? (
           <input
-            className="flex-1"
+            className={`flex-1 outline-none ${isEditing ? 'font-semibold text-lime-600 bg-lime-100' : ''}`}
+            ref={inputRef}
             value={editText}
             onChange={(e) => setEditText(e.target.value)}
             onKeyDown={(e) => {

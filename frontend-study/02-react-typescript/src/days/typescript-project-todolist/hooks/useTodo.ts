@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useLocalStorage } from './useLocalStorage';
 import { Todo } from '../types/todo';
+import { FILTERS, FilterType } from '../types/filter';
 
 export const useTodo = () => {
   const {
@@ -15,7 +16,7 @@ export const useTodo = () => {
   } | null>(null);
 
   const [deleteTarget, setDeleteTarget] = useState<number | null>(null);
-  const [filter, setFilter] = useState<'all' | 'done' | 'todo'>('all');
+  const [filter, setFilter] = useState<FilterType>(FILTERS.ALL);
 
   // 할 일 검색용 상태 관리
   const [search, setSearch] = useState('');
@@ -26,22 +27,25 @@ export const useTodo = () => {
   const [undoTimer, setUndoTimer] = useState<number | null>(null);
 
   // 할 일 상태에 따른 필터링 여부
-  const filteredTodos = todos.filter((todo) => {
-    if (filter === 'done') if (!todo.completed) return false;
-    if (filter === 'todo') if (todo.completed) return false;
-    if (
-      search.trim() &&
-      !todo.text.toLowerCase().includes(search.toLowerCase())
-    ) {
-      return false;
-    }
-    return true;
-  });
+  const filterTodos = (todos: Todo[], filter: FilterType, search: string) => {
+    const keyword = search.trim().toLowerCase();
+
+    return todos.filter((todo) => {
+      if (filter === FILTERS.DONE && !todo.completed) return false;
+      if (filter === FILTERS.TODO && todo.completed) return false;
+
+      if (keyword && !todo.text.toLowerCase().includes(keyword)) {
+        return false;
+      }
+
+      return true;
+    });
+  };
+  const filteredTodos = filterTodos(todos, filter, search);
 
   // 새로운 할 일 추가
   const addTodo = (text: string) => {
-    const newTodo: Todo = { id: Date.now(), text, completed: false };
-    setTodos([...todos, newTodo]);
+    setTodos((prev) => [...prev, { id: Date.now(), text, completed: false }]);
   };
 
   // 할 일 수정
@@ -51,8 +55,8 @@ export const useTodo = () => {
 
   // 할 일 상태 (완료, 미완료) 토글 기능
   const toggleTodo = (id: number) => {
-    setTodos(
-      todos.map((todo) =>
+    setTodos((prev) =>
+      prev.map((todo) =>
         todo.id === id ? { ...todo, completed: !todo.completed } : todo,
       ),
     );
@@ -61,7 +65,7 @@ export const useTodo = () => {
   // 할 일 삭제 기능 + 삭제 복구를 위한 targetid 설정
   const deleteTodo = (id: number) => {
     const target = todos.find((t) => t.id === id) || null;
-    setTodos(todos.filter((todo) => todo.id !== id));
+    setTodos((prev) => prev.filter((todo) => todo.id !== id));
     setLastDeleted(target);
 
     if (undoTimer) {

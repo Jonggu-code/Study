@@ -10,9 +10,11 @@ import UndoBar from '../todo/UndoBar';
 import { Spinner } from '../ui/Spinner';
 import LoadingDots from '../ui/LoadingDots';
 import TodayLabel from '../todo/TodayLabel';
+import StatsBar from '../todo/StatsBar';
 
 function Index() {
   const {
+    todos,
     setTodos,
     addTodo,
     updateTodo,
@@ -51,10 +53,13 @@ function Index() {
     );
   }
   return (
-    <div className="relative text-gray-700 p-5 border-2 border-lime-500 m-1 box-border w-xl h-max bg-lime-100">
-      <div className="flex justify-between items-end mb-5 px-2">
+    <div className="relative text-gray-700 p-5 border-2 border-lime-500 m-1 box-border w-xl h-max rounded-xl bg-lime-100 transition duration-200">
+      <div className="flex justify-between items-center mb-5 px-2">
         <h2 className="text-3xl font-bold">🧩 To do List</h2>
-        <TodayLabel />
+        <div className="flex flex-col items-end">
+          <TodayLabel />
+          <StatsBar todos={todos} />
+        </div>
       </div>
       <TodoInput addTodo={addTodo} showAlert={showAlert} />
       <div className="flex justify-between items-center mb-5">
