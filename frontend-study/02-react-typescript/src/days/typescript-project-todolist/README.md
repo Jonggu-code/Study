@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://github.com/Jonggu-code/Study/blob/main/frontend-study/02-react-typescript/src/days/typescript-project-todolist/public/thumbnail.gif">
+</p>
+
 # To-Do App — React + TypeScript
 
 React + TypeScript 기반에서 상태 관리 / 커스텀 훅 / 아키텍처 설계 를
