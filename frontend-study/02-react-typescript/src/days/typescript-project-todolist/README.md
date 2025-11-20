@@ -1,12 +1,21 @@
-# 📝 Advanced To-Do App — React + TypeScript + Framer Motion
+# To-Do App — React + TypeScript
 
-할 일을 단순히 추가/삭제하는 수준을 넘어서,
-**Drag & Drop·모달·검색·통계·Undo 기능**까지 포함된 실전형 Todo 애플리케이션입니다.
-
-React + TypeScript 기반에서 “상태 관리·커스텀 훅·UI/UX·애니메이션·아키텍처 설계”를
+React + TypeScript 기반에서 상태 관리 / 커스텀 훅 / 아키텍처 설계 를
 종합적으로 경험하기 위해 제작했습니다.
 
----
+## 🌐 배포 주소
+
+Vercel 배포 링크
+
+## 🎯 프로젝트 목적과 의도
+
+1. **React + TS 기반 실전 아키텍처 경험**
+2. 컴포넌트/훅/타입 레이어를 명확히 분리하여 유지보수성 확보
+3. Motion 기반 고급 UI/UX 경험
+4. 위에서 아래까지(레이아웃 → UI → 기능 → 도메인 로직) 플로우 구성
+
+단순 CRUD를 넘어서,
+**“하나의 작은 웹앱”을 혼자서 처음부터 끝까지 설계하는 경험**을 목표로 했습니다.
 
 ## 🚀 주요 기능
 
@@ -28,9 +37,6 @@ React + TypeScript 기반에서 “상태 관리·커스텀 훅·UI/UX·애니�
 - **로딩 UI: Spinner / LoadingDots**
 - **TodayLabel: 오늘 날짜 자동 표시**
 - **ClickGuard로 모달 외부 클릭 감지**
-- **아이콘 컴포넌트(Cancel / Undo / Search) 직접 제작**
-
----
 
 ## 🧱 기술 스택
 
@@ -39,13 +45,11 @@ React + TypeScript 기반에서 “상태 관리·커스텀 훅·UI/UX·애니�
 - Vite
 - Framer Motion (Reorder 기반 Drag & Drop)
 - Custom Hooks (useTodo, useTodoItem, useLocalStorage, useAlert 등)
-- CSS (custom inline 스타일 + index.css)
-
----
+- Tailwind CSS
 
 ## 📁 폴더 구조
 
-```
+```sql
 src/
  ┣ components/
  ┃ ┣ layout/
@@ -84,8 +88,6 @@ src/
  ┗ main.tsx
 ```
 
----
-
 ## 🔧 주요 로직 소개
 
 ### ✔ `useTodo` — Todo 전체 비즈니스 로직
@@ -100,16 +102,7 @@ src/
 
 - 체크박스 토글
 - 삭제 애니메이션 (fade-out)
-- 삭제 버튼 guard
-
-### ✔ `useAlert` — Alert & Confirm 모달 훅
-
-Promise 기반 API로 사용
-
-```ts
-const confirmed = await alert.confirm('정말 삭제하시겠어요?');
-if (confirmed) deleteTodo(id);
-```
+- 할 일 수정 기능
 
 ### ✔ Drag & Drop (Framer Motion)
 
@@ -124,35 +117,6 @@ if (confirmed) deleteTodo(id);
 - Custom Icons
 - UndoBar, StatsBar, TodayLabel 등 UI 요소 분리
 
----
-
-## 🎯 프로젝트 목적과 의도
-
-1. **React + TS 기반 실전 아키텍처 경험**
-2. 컴포넌트/훅/타입 레이어를 명확히 분리하여 유지보수성 확보
-3. Motion 기반 고급 UI/UX 경험
-4. 위에서 아래까지(레이아웃 → UI → 기능 → 도메인 로직) 플로우 구성
-
-단순 CRUD를 넘어서,
-**“하나의 작은 웹앱”을 혼자서 처음부터 끝까지 설계하는 경험**을 목표로 했습니다.
-
----
-
-## 🧪 실행 방법
-
-```
-npm install
-npm run dev
-```
-
----
-
-## 🌐 배포 주소
-
-> (여기에 Vercel 배포 링크 삽입)
-
----
-
 ## 📊 결과 및 성과
 
 | 항목           | 수치                                                    |
@@ -164,11 +128,6 @@ npm run dev
 | UX 개선 요소   | **7개 (search, stats, modal, undo, drag, fade-out 등)** |
 | 기능 확장률    | 기본 Todo 대비 **400% 이상 기능 확장**                  |
 
-프로젝트를 진행하며 가장 크게 느낀 점은
-**"React + TS로 규모가 있는 프로젝트를 구조화하는 방법"** 이 확실히 감 잡힌 것이다.
-
----
-
 ## 💡 배운 점 & 인사이트
 
 - 파일/폴더 구조가 커질수록 책임 분리가 얼마나 중요한지 체감
@@ -177,17 +136,13 @@ npm run dev
 - 타입을 세분화(filter, modal, props 등)하면 컴파일 오류로 많은 실수를 예방 가능
 - UI/UX는 “기능”보다 중요할 수 있다는 점을 깨달음
 
----
-
 ## 🔭 향후 계획
 
-- Todo 수정(Edit 기능)
-- 다크모드
-- 상태전역(Zustand / Jotai) 적용
-- 백엔드 연동 버전 제작 (Supabase or Express)
-- 테스트 코드(RTL + Jest) 도입
-
----
+- 다크 모드 지원
+- 모바일 반응형 지원
+- 전역 상태 (Zustand or Jotai) 적용
+- 테스트 코드 (React Testing Library) 도입
+- 백엔드 연결 버전 제작 (Express or Supabase)
 
 ## 📚 참고 자료
 
@@ -195,12 +150,3 @@ npm run dev
 - TypeScript Handbook
 - Framer Motion Reorder Docs
 - LocalStorage MDN Docs
-
----
-
-종찬아 이 README는
-👉 GitHub에서 딱 열었을 때 담당자가 바로 내용을 “읽고 이해할 수 있는 구조”로 최적화했어.
-👉 내용은 정확하고, 기능은 명확하며, 네 프로젝트 깊이를 잘 드러낼 수 있도록 구성함.
-👉 문장 스타일도 너처럼 “정확·담백·자세하게” 맞춰놨고.
-
-원하면 **Notion 버전, 포트폴리오용 요약 버전, PDF 디자인 버전**도 만들어줄까?
