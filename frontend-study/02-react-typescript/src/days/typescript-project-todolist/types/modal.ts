@@ -4,3 +4,7 @@ export interface ConfirmModalProps {
   onCancel: () => void;
   showAlert: (msg: string) => void;
 }
+
+export interface AlertModalProps {
+  message: string | null;
+}

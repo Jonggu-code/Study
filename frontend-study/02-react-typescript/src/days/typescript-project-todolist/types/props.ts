@@ -30,10 +30,6 @@ export interface FilterBtnProps {
   setFilter: Dispatch<SetStateAction<FilterType>>;
 }
 
-export interface AlertModalProps {
-  message: string | null;
-}
-
 export interface SearchProps {
   search: string;
   setSearch: (value: string) => void;
